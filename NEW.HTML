@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비트 시네마 - 영화 예매</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+
+    <header>
+        <h1>🎬 BIT CINEMA</h1>
+        <nav>
+            <ul>
+                <li><a href="#">영화</a></li>
+                <li><a href="#">예매</a></li>
+                <li><a href="#">이벤트</a></li>
+                <li><a href="#">로그인</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="movie-list">
+            <h2>현재 상영작</h2>
+            <div class="movie-container">
+                <article class="movie-card">
+                    <img src="https://via.placeholder.com/150x220" alt="영화 포스터">
+                    <h3>영화 제목 1</h3>
+                    <p>예매율 15.5%</p>
+                    <button>예매하기</button>
+                </article>
+
+                <article class="movie-card">
+                    <img src="https://via.placeholder.com/150x220" alt="영화 포스터">
+                    <h3>영화 제목 2</h3>
+                    <p>예매율 12.1%</p>
+                    <button>예매하기</button>
+                </article>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="quick-booking">
+            <h2>빠른 예매</h2>
+            <form action="#">
+                <label for="movie-select">영화 선택:</label>
+                <select id="movie-select">
+                    <option value="m1">영화 제목 1</option>
+                    <option value="m2">영화 제목 2</option>
+                </select>
+
+                <label for="date">날짜:</label>
+                <input type="date" id="date">
+
+                <label for="person-count">인원:</label>
+                <input type="number" id="person-count" min="1" max="10" value="1">
+
+                <button type="submit">좌석 선택하러 가기</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 비트 시네마 모둠 과제. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
