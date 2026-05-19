@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19세 이상 인증</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container{
+            background-color: rgb(218, 205, 205);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1{
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p{
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .input-group{
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label{
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        .input-group input[type="number"]{
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button{
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        button:hover{
+            background-color: #0056b3;
+        }
+        .message{
+            margin-top: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .success{
+            color: green;
+        }
+        .message.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>19세 이상 인증</h1>
+        <p>서비스 이용을 위해 생년월일을 입력해주세요.</p>
+        <div class="input-group">
+            <label for="birthYear">년:</label>
+            <input type="number" id="birthYear" placeholder="YYYY" min="1900" max="2099">
+        </div>
+        <div class="input-group">
+            <label for="birthMonth">월:</label>
+            <input type="number" id="birthMonth" placeholder="MM" min="1" max="12">
+        </div>
+        <div class="input-group">
+            <label for="birthDay">일:</label>
+            <input type="number" id="birthDay" placeholder="DD" min="1" max="31">
+        </div>
+        <button onclick="checkAge()">인증하기</button>
+        <p id="result" class="message"></p>
+    </div>
+    <script>
+        function checkAge() {
+        const birthYear = document.getElementById('birthYear').value;
+        const birthMonth = document.getElementById('birthMonth').value;
+        const birthDay = document.getElementById('birthDay').value;
+        const resultElement = document.getElementById('result');
+
+        resultElement.className = 'message'; // Reset message style
+
+        if (!birthYear || !birthMonth || !birthDay) {
+            resultElement.textContent = '생년월일을 모두 입력해주세요.';
+            resultElement.classList.add('error');
+            return;
+        }
+
+        const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
+        const today = new Date();
+
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+
+        if (age >= 19) {
+            resultElement.textContent = '성인 인증 완료! 서비스 이용이 가능합니다.';
+            resultElement.classList.add('success');
+            window.location.href='3.html'
+        } else {
+            resultElement.textContent = '죄송합니다. 19세 미만은 서비스 이용이 불가합니다.';
+            resultElement.classList.add('error');
+        }
+    }
+    </script>
+</body>
+</html>
