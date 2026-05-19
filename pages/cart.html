@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니</title>
+    <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+    <div class="container">
+        <h1>장바구니</h1>
+        <table id="cart-table">
+            <thead>
+                <tr>
+                    <th>영화 제목</th>
+                    <th>날짜</th>
+                    <th>좌석</th>
+                    <th>금액</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody id="cart-body">
+            </tbody>
+        </table>
+        
+        <div class="total-container">
+            총 결제 금액: <span id="cart-total">0</span>원
+        </div>
+
+        <div style="text-align: right;">
+            <a href="../index.html" class="btn" style="background: #6c757d;">영화 더보기</a>
+            <a href="booking.html" class="btn">좌석 예매하러 가기</a>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartBody = document.getElementById('cart-body');
+            const cartTotal = document.getElementById('cart-total');
+            
+            cartBody.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartBody.innerHTML = '<tr><td colspan="5">장바구니가 비어 있습니다.</td></tr>';
+            } else {
+                cart.forEach((item, index) => {
+                    const amount = item.totalPrice != null
+                        ? item.totalPrice
+                        : item.price * (item.quantity || 1);
+                    total += amount;
+                    const seatLabel = item.seats && item.seats.length
+                        ? item.seats.map((s) => s + 1).join(', ') + '번'
+                        : '-';
+                    const dateLabel = item.bookingDate || '-';
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${dateLabel}</td>
+                        <td>${seatLabel}</td>
+                        <td>${amount.toLocaleString()}원</td>
+                        <td><button class="btn-remove" onclick="removeItem(${index})">삭제</button></td>
+                    `;
+                    cartBody.appendChild(row);
+                });
+            }
+
+            cartTotal.textContent = total;
+        }
+
+        function updateQuantity(index, newQuantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (newQuantity < 1) newQuantity = 1;
+            cart[index].quantity = parseInt(newQuantity);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        loadCart();
+    </script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

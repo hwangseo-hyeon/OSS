@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비트 시네마 - 영화 예매</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="top-nav">
+        <a href="index.html"><img src="images/logo.jpg" alt="BIT CINEMA" class="logo"></a>
+        <a href="pages/movies_all.html">전체 이용가</a>
+        <a href="pages/movies_15.html">15세 이용가</a>
+        <a href="pages/movies_19.html">19세 이용가</a>
+        <a href="pages/login.html" id="nav-login">로그인</a>
+        <a href="pages/my_booking.html" id="nav-my-booking">예매한 영화</a>
+        <a href="#" id="nav-logout" class="nav-hidden">로그아웃</a>
+    </header>
+
+    <main>
+        <h1 class="page-title">BIT CINEMA</h1>
+        <p class="page-subtitle">지금 상영 중인 영화를 만나보세요</p>
+
+        <section id="movie-list" class="now-showing">
+            <h2 class="section-title">현재 상영작</h2>
+            <div id="movie-scroll" class="movie-scroll" aria-label="현재 상영작 목록"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 비트 시네마 모둠 과제. All rights reserved.</p>
+    </footer>
+
+    <script src="js/movie_modal.js"></script>
+    <script src="js/index_movies.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

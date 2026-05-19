@@ -1,0 +1,249 @@
+.modal-panel--wide {
+    max-width: 920px;
+    padding: 28px 24px 24px;
+}
+
+.modal-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-info .modal-poster {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto 16px;
+}
+
+.modal-info .modal-title {
+    text-align: left;
+    padding: 0;
+}
+
+.modal-info .modal-synopsis {
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.modal-booking {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.booking-heading {
+    font-size: 1.1rem;
+    margin: 0 0 4px;
+    color: var(--accent-color);
+}
+
+.booking-movie-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 14px;
+    color: var(--text-primary);
+}
+
+.booking-field {
+    margin-bottom: 12px;
+}
+
+.booking-field label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.booking-field input[type="date"] {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+    font-family: inherit;
+}
+
+.seat-legend {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.seat-legend li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-seat {
+    display: inline-block;
+    width: 12px;
+    height: 10px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.legend-seat.available {
+    background: #444451;
+}
+
+.legend-seat.selected {
+    background: #6feaf6;
+}
+
+.legend-seat.occupied {
+    background: #fff;
+}
+
+.cinema-screen {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08));
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    padding: 6px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.modal-row-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.modal-row-container .row {
+    display: flex;
+}
+
+.modal-row-container .seat {
+    background-color: #444451;
+    height: 10px;
+    width: 12px;
+    margin: 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.modal-row-container .seat.selected {
+    background-color: #6feaf6;
+}
+
+.modal-row-container .seat.occupied {
+    background-color: #fff;
+}
+
+.modal-row-container .seat:not(.occupied):hover {
+    cursor: pointer;
+    transform: scale(1.15);
+}
+
+.booking-summary {
+    font-size: 0.9rem;
+    margin: 0 0 10px;
+    color: var(--text-primary);
+}
+
+.booking-summary span {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.modal-booking .ticket-type {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-bottom: 14px;
+    font-size: 0.85rem;
+}
+
+.modal-booking .ticket-type input[type="number"] {
+    width: 52px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-modal-cart,
+.btn-modal-book {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-modal-cart {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+}
+
+.btn-modal-book {
+    background: var(--accent-gradient);
+    color: white;
+}
+
+.btn-modal-cart:hover,
+.btn-modal-book:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.modal-booking-message {
+    margin: 10px 0 0;
+    font-size: 0.85rem;
+    min-height: 1.2em;
+}
+
+.modal-booking-message.success {
+    color: #6feaf6;
+}
+
+.modal-booking-message.error {
+    color: #ff6b6b;
+}
+
+@media (max-width: 768px) {
+    .modal-panel--wide {
+        max-width: 95vw;
+        padding: 20px 16px;
+    }
+
+    .modal-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .modal-info .modal-synopsis {
+        max-height: 120px;
+    }
+}

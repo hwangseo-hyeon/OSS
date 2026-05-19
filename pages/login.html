@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비트 시네마 - 로그인</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>로그인</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="userId">아이디</label>
+                <input type="text" id="userId" placeholder="아이디 입력 (예: user)" required>
+            </div>
+            <div class="input-group">
+                <label for="userPw">비밀번호</label>
+                <input type="password" id="userPw" placeholder="비밀번호 입력 (예: 1234)" required>
+            </div>
+            <button type="submit">로그인</button>
+        </form>
+        <div style="margin-top: 15px;">
+            <a href="signup.html" style="color: #007bff; text-decoration: none;">계정이 없으신가요? 회원가입</a>
+        </div>
+        <p class="info">테스트 계정: 아이디 <strong>user</strong> / 비번 <strong>1234</strong></p>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('userId').value;
+            const pw = document.getElementById('userPw').value;
+            login(id, pw);
+        });
+    </script>
+</body>
+</html>

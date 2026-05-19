@@ -1,0 +1,32 @@
+.main_img{
+            width: 100%;
+            height: auto;
+            position: relative;
+            display: inline-block;
+        }
+        .serve_img{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .main_text{
+            position: absolute;
+            top: 20px;
+            left: 45%;
+            font-family: "Jua", sans-serif;
+            font-weight: 800;
+            font-style: normal;
+        }
+        .serve_text{
+            position: absolute;
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        fieldset{
+            position: absolute;
+            border-radius: 10px;
+        }
+        .center{
+            text-align: center;
+        }
