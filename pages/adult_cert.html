@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19세 이상 인증 - BIT CINEMA</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/adult_cert.css">
+</head>
+<body>
+    <header class="top-nav">
+        <a href="../index.html"><img src="../images/logo.jpg" alt="BIT CINEMA" class="logo"></a>
+        <a href="movies_all.html">전체 이용가</a>
+        <a href="movies_15.html">15세 이용가</a>
+        <a href="movies_19.html">19세 이용가</a>
+        <a href="login.html" id="nav-login">로그인</a>
+        <a href="my_booking.html" id="nav-my-booking">예매한 영화</a>
+        <a href="#" id="nav-logout" class="nav-hidden">로그아웃</a>
+    </header>
+
+    <main class="cert-page">
+        <div class="cert-card">
+            <p class="cert-badge">19+</p>
+            <h1 class="cert-title">성인 인증</h1>
+            <p class="cert-desc">19세 이용가 콘텐츠 이용을 위해 생년월일을 입력해주세요.<br>로그인 없이도 인증할 수 있습니다.</p>
+
+            <form class="cert-form" id="cert-form">
+                <div class="birth-row">
+                    <div class="input-group">
+                        <label for="birthYear">년</label>
+                        <input type="number" id="birthYear" placeholder="YYYY" min="1900" max="2099" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="birthMonth">월</label>
+                        <input type="number" id="birthMonth" placeholder="MM" min="1" max="12" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="birthDay">일</label>
+                        <input type="number" id="birthDay" placeholder="DD" min="1" max="31" required>
+                    </div>
+                </div>
+                <button type="submit" class="cert-submit">인증하기</button>
+            </form>
+            <p id="result" class="cert-message" role="status" aria-live="polite"></p>
+            <a href="../index.html" class="cert-back">메인으로 돌아가기</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 비트 시네마 모둠 과제. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        function checkAge(e) {
+            if (e) e.preventDefault();
+
+            const birthYear = document.getElementById('birthYear').value;
+            const birthMonth = document.getElementById('birthMonth').value;
+            const birthDay = document.getElementById('birthDay').value;
+            const resultElement = document.getElementById('result');
+
+            resultElement.className = 'cert-message';
+
+            if (!birthYear || !birthMonth || !birthDay) {
+                resultElement.textContent = '생년월일을 모두 입력해주세요.';
+                resultElement.classList.add('error');
+                return;
+            }
+
+            const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
+            const today = new Date();
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            if (age >= 19) {
+                const currentUserStr = localStorage.getItem('loggedInUser');
+                if (currentUserStr) {
+                    const users = JSON.parse(localStorage.getItem('USERS')) || [];
+                    const currentUserObj = JSON.parse(currentUserStr);
+                    const userIndex = users.findIndex((u) => u.id === currentUserObj.id);
+
+                    if (userIndex !== -1) {
+                        users[userIndex].isAdult = true;
+                        users[userIndex].birthDate = `${birthYear}-${String(birthMonth).padStart(2, '0')}-${String(birthDay).padStart(2, '0')}`;
+                        localStorage.setItem('USERS', JSON.stringify(users));
+                    }
+                } else {
+                    setGuestAdultCertified();
+                }
+
+                resultElement.textContent = '성인 인증 완료! 19세 이용가 페이지로 이동합니다.';
+                resultElement.classList.add('success');
+                setTimeout(() => {
+                    window.location.href = 'movies_19.html';
+                }, 1000);
+            } else {
+                resultElement.textContent = '죄송합니다. 19세 미만은 서비스 이용이 불가합니다.';
+                resultElement.classList.add('error');
+            }
+        }
+
+        document.getElementById('cert-form').addEventListener('submit', checkAge);
+    </script>
+</body>
+</html>

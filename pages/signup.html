@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비트 시네마 - 회원가입</title>
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>회원가입</h1>
+        <form id="signup-form">
+            <div class="input-group">
+                <label for="newId">아이디</label>
+                <input type="text" id="newId" placeholder="사용할 아이디" required>
+            </div>
+            <div class="input-group">
+                <label for="newPw">비밀번호</label>
+                <input type="password" id="newPw" placeholder="비밀번호" required>
+            </div>
+            <div class="input-group">
+                <label for="newName">이름</label>
+                <input type="text" id="newName" placeholder="이름" required>
+            </div>
+            <div class="input-group">
+                <label for="birthDate">생년월일 (성인 인증용)</label>
+                <input type="date" id="birthDate" required>
+            </div>
+            <button type="submit">가입하기</button>
+            <a href="login.html" class="link">이미 계정이 있으신가요? 로그인</a>
+        </form>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('newId').value;
+            const pw = document.getElementById('newPw').value;
+            const name = document.getElementById('newName').value;
+            const birthDate = document.getElementById('birthDate').value;
+            
+            if(signup(id, pw, name, birthDate)) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>
